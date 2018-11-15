@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("Hello World!");
-        System.setProperty("spiffe.endpoint.socket", "127.0.0");
+        System.setProperty("spiffe.endpoint.socket", "/tmp/agent.sock");
         Consumer<List<Workload.X509SVID>> certificateUpdater = certs -> {
             System.out.println("=========");
             Validate.isTrue(certs.size() == 1, "Multiple identities is not supported");
