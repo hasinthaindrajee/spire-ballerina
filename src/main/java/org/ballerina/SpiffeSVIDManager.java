@@ -57,6 +57,16 @@ public class SpiffeSVIDManager {
             X509SVID svid  = certs.get(0);
             LOGGER.info("Spiffe ID fetched: " + svid.getSpiffeId());
             spiffeSVID = new SpiffeSVID(svid);
+            System.out.println("private key: " + spiffeSVID.getPrivateKey());
+            System.out.println("spiffe ID: " + spiffeSVID.getSpiffeID());
+            System.out.println("svid : " + spiffeSVID.getSvid());
+            System.out.println("public certs");
+            spiffeSVID.getBundle().forEach(x509Certificate -> {
+                System.out.println("issuer DN: " + x509Certificate.getIssuerDN());
+                System.out.println("subject DN: " + x509Certificate.getSubjectDN());
+                System.out.println("getIssuerX500Principal : " + x509Certificate.getIssuerX500Principal());
+                System.out.println("===============");
+            });
             LOGGER.info("SVID Successfully updated");
         };
 

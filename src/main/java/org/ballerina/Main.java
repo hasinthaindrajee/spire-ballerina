@@ -10,19 +10,10 @@ import java.util.function.Consumer;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         System.out.println("Hello World!");
         System.setProperty("spiffe.endpoint.socket", "/tmp/agent.sock");
-        Consumer<List<Workload.X509SVID>> certificateUpdater = certs -> {
-            System.out.println("=========");
-            Validate.isTrue(certs.size() == 1, "Multiple identities is not supported");
-            Workload.X509SVID svid  = certs.get(0);
-            System.out.printf(svid.toString());
-        };
-        Fetcher<List<Workload.X509SVID>> svidFetcher = new X509SvidFetcher();
-        System.out.println("===================");
-        svidFetcher.registerListener(certificateUpdater);
-        System.out.println("something");
+        SpiffeSVIDManager spiffeSVIDManager = SpiffeSVIDManager.getInstance();
     }
 }
